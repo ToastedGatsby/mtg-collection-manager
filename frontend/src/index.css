@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+/* MTG mana colors + app palette, usable as bg-mana-w, text-mana-u etc. */
+@theme {
+  --color-mana-w: #f8f6d8;
+  --color-mana-u: #0e68ab;
+  --color-mana-b: #2b2523;
+  --color-mana-r: #d3202a;
+  --color-mana-g: #00733e;
+  --color-mana-c: #cac5c0;
+
+  --color-surface: #14161c;
+  --color-surface-2: #1d2029;
+  --color-surface-3: #272b37;
+  --color-accent: #c9a14a;
+
+  --font-display: "Cinzel", "Georgia", serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-surface text-zinc-200 antialiased;
+}

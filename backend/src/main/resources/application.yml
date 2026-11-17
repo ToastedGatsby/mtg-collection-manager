@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: mtg-backend
+  datasource:
+    # Defaults match docker-compose.yml. In production these come from environment variables.
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/mtg}
+    username: ${DB_USER:mtg}
+    password: ${DB_PASSWORD:mtg_dev_password}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate # schema is owned by Flyway, Hibernate only checks it
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 500 # bulk Scryfall import
+        order_inserts: true
+  flyway:
+    locations: classpath:db/migration
+
+server:
+  port: ${PORT:8080}
+  error:
+    include-stacktrace: never
+    include-message: never
+
+app:
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5173}
+  scryfall:
+    base-url: https://api.scryfall.com
+    # Scryfall requires a descriptive User-Agent + Accept header on every request
+    user-agent: MTGVault/0.1 (personal portfolio project)
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
