@@ -60,6 +60,20 @@ Security measures: BCrypt (cost 12), JWT HS256 with issuer + expiry validation, 
 reuse detection (a replayed token revokes all of the user's sessions), only SHA-256 hashes of refresh tokens
 stored, login lockout per email+IP after 5 failures, generic login errors (no user enumeration), RFC 9457 error bodies.
 
+## Cards & decks
+
+| Endpoint | Auth | Description |
+|---|---|---|
+| `GET /api/cards?q&colors&colorMode&type&format&rarity&set&cmcMin&cmcMax&sort&page&size` | public | Card search (PostgreSQL arrays/JSONB/trigram indexes) |
+| `GET /api/cards/{oracleId}` · `/printings` | public | Card detail, every printing with prices and buy links |
+| `GET/POST /api/decks`, `GET/PATCH/DELETE /api/decks/{id}` | Bearer | Own decks only (other users' decks return 404) |
+| `PUT /api/decks/{id}/cards` | Bearer | Set copies of a printing in Main/Sideboard/Commander/Maybeboard (0 removes) |
+| `POST /api/decks/import`, `GET /api/decks/{id}/export` | Bearer | Arena/MTGO text lists |
+
+Card data: nightly streaming import of Scryfall's `default_cards` bulk file (~100k printings) with JDBC batch upserts.
+Deck validation uses the **Strategy** pattern (`FormatRules`: constructed formats and Commander) and returns every
+problem found (deck size, copies, banned/restricted, colour identity, partner commanders, "any number of" cards).
+
 A Postman collection is in [`postman/`](postman/MTG-Vault.postman_collection.json).
 
 ## Configuration (environment variables)

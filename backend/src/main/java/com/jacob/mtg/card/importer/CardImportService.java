@@ -23,10 +23,9 @@ import tools.jackson.databind.MappingIterator;
 /**
  * Imports Scryfall's daily bulk file (~100k printings, ~500 MB of JSON) into PostgreSQL.
  *
- * The file is gzipped JSON Lines (one card object per line; older Scryfall files were one big JSON
- * array - both work). Instead of loading it all (that would need gigabytes of RAM), Jackson's
- * MappingIterator reads it as a stream: one card at a time, mapped, buffered into batches of 1000 and
- * written. Memory use stays flat no matter how big the file gets.
+ * The file is a single JSON array. Instead of loading it all (that would need gigabytes of RAM),
+ * Jackson's MappingIterator reads it as a stream: one card object at a time, mapped, buffered into
+ * batches of 1000 and written. Memory use stays flat no matter how big the file gets.
  */
 @Service
 public class CardImportService {
@@ -69,9 +68,8 @@ public class CardImportService {
             }
 
             runId = importLog.start(properties.bulkType(), fileVersion);
-            log.info("Importing Scryfall {} ({} MB compressed, generated {})",
-                properties.bulkType(), info.compressedSize() == null ? "?" : info.compressedSize() / 1_000_000,
-                info.updatedAt());
+            log.info("Importing Scryfall {} ({} MB, generated {})",
+                properties.bulkType(), info.size() == null ? "?" : info.size() / 1_000_000, info.updatedAt());
             long started = System.currentTimeMillis();
 
             try (InputStream in = scryfallClient.openBulkFile(info)) {
@@ -89,11 +87,7 @@ public class CardImportService {
         }
     }
 
-    /**
-     * Streams Scryfall cards into the database. Accepts JSON Lines or a JSON array: MappingIterator
-     * reads a sequence of root-level objects, and unwraps a root-level array.
-     * Public so tests can feed a small fixture file.
-     */
+    /** Streams a JSON array of Scryfall cards into the database. Public so tests can feed a small fixture file. */
     public ImportResult importFrom(InputStream json) {
         int imported = 0;
         int skipped = 0;

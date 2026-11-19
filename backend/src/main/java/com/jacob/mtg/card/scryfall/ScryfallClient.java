@@ -37,23 +37,19 @@ public class ScryfallClient {
             HttpResponse.BodyHandlers.ofString());
         ensureOk(response.statusCode(), "bulk-data list");
 
-        BulkDataInfo info = ScryfallJson.MAPPER.readValue(response.body(), BulkDataInfo.BulkDataList.class).data().stream()
-            .filter(entry -> properties.bulkType().equals(entry.type()))
+        return ScryfallJson.MAPPER.readValue(response.body(), BulkDataInfo.BulkDataList.class).data().stream()
+            .filter(info -> properties.bulkType().equals(info.type()))
             .findFirst()
             .orElseThrow(() -> new IOException("Scryfall has no bulk file of type " + properties.bulkType()));
-        if (info.fileUri() == null) {
-            throw new IOException("Scryfall bulk entry has no download URL (API format changed?)");
-        }
-        return info;
     }
 
     /**
-     * Opens the bulk file as a stream. Nothing is written to disk and the whole file is never held
-     * in memory: the importer reads one card at a time from this stream.
+     * Opens the (large) bulk file as a stream. Nothing is written to disk and the whole file is
+     * never held in memory: the importer reads one card at a time from this stream.
      */
     public InputStream openBulkFile(BulkDataInfo info) throws IOException, InterruptedException {
-        HttpRequest request = request(URI.create(info.fileUri()))
-            .setHeader("Accept", "*/*") // a .jsonl.gz file, not an API response
+        HttpRequest request = request(URI.create(info.downloadUri()))
+            .header("Accept-Encoding", "gzip") // ~5x smaller download
             .timeout(Duration.ofMinutes(30))
             .build();
         HttpResponse<InputStream> response = http.send(request, HttpResponse.BodyHandlers.ofInputStream());
@@ -61,21 +57,11 @@ public class ScryfallClient {
             response.body().close();
             ensureOk(response.statusCode(), "bulk file");
         }
-        return decompressIfGzip(response.body());
-    }
-
-    /**
-     * The file itself is a .jsonl.gz (gzip is the file format, not a transfer encoding, so the HTTP
-     * client will not unpack it). Detect gzip by its magic bytes 1F 8B, so a plain file works too.
-     */
-    public static InputStream decompressIfGzip(InputStream raw) throws IOException {
-        BufferedInputStream in = new BufferedInputStream(raw, 1 << 16);
-        in.mark(2);
-        int b1 = in.read();
-        int b2 = in.read();
-        in.reset();
-        boolean gzip = b1 == 0x1f && b2 == 0x8b;
-        return gzip ? new GZIPInputStream(in, 1 << 16) : in;
+        boolean gzip = response.headers().firstValue("Content-Encoding")
+            .map(v -> v.equalsIgnoreCase("gzip"))
+            .orElse(false);
+        InputStream body = new BufferedInputStream(response.body(), 1 << 16);
+        return gzip ? new GZIPInputStream(body, 1 << 16) : body; // java.net.http does not decompress by itself
     }
 
     private HttpRequest.Builder request(URI uri) {

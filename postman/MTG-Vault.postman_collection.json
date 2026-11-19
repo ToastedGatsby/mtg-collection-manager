@@ -5,90 +5,340 @@
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
-    { "key": "baseUrl", "value": "http://localhost:8080" },
-    { "key": "email", "value": "jacob.test@example.com" },
-    { "key": "password", "value": "Correct-Horse-Battery-42" },
-    { "key": "accessToken", "value": "" }
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "email",
+      "value": "jacob.test@example.com"
+    },
+    {
+      "key": "password",
+      "value": "Correct-Horse-Battery-42"
+    },
+    {
+      "key": "accessToken",
+      "value": ""
+    },
+    {
+      "key": "deckId",
+      "value": ""
+    },
+    {
+      "key": "printingId",
+      "value": ""
+    }
   ],
   "auth": {
     "type": "bearer",
-    "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
   },
   "item": [
     {
       "name": "Health",
-      "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{baseUrl}}/api/health" }
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "url": "{{baseUrl}}/api/health"
+      }
     },
     {
       "name": "1. Register",
-      "event": [{
-        "listen": "test",
-        "script": { "exec": [
-          "pm.test('201 Created', () => pm.response.to.have.status(201));",
-          "pm.collectionVariables.set('accessToken', pm.response.json().accessToken);"
-        ] }
-      }],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('201 Created', () => pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('accessToken', pm.response.json().accessToken);"
+            ]
+          }
+        }
+      ],
       "request": {
-        "auth": { "type": "noauth" },
+        "auth": {
+          "type": "noauth"
+        },
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "url": "{{baseUrl}}/api/auth/register",
-        "body": { "mode": "raw", "raw": "{\n  \"displayName\": \"Jacob\",\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\",\n  \"acceptTerms\": true\n}" }
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"displayName\": \"Jacob\",\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\",\n  \"acceptTerms\": true\n}"
+        }
       }
     },
     {
       "name": "2. Login",
-      "event": [{
-        "listen": "test",
-        "script": { "exec": [
-          "pm.test('200 OK', () => pm.response.to.have.status(200));",
-          "pm.collectionVariables.set('accessToken', pm.response.json().accessToken);"
-        ] }
-      }],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));",
+              "pm.collectionVariables.set('accessToken', pm.response.json().accessToken);"
+            ]
+          }
+        }
+      ],
       "request": {
-        "auth": { "type": "noauth" },
+        "auth": {
+          "type": "noauth"
+        },
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "url": "{{baseUrl}}/api/auth/login",
-        "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}" }
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+        }
       }
     },
     {
       "name": "3. Me (protected)",
-      "event": [{
-        "listen": "test",
-        "script": { "exec": ["pm.test('200 OK', () => pm.response.to.have.status(200));"] }
-      }],
-      "request": { "method": "GET", "url": "{{baseUrl}}/api/users/me" }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/users/me"
+      }
     },
     {
       "name": "4. Refresh (uses cookie)",
-      "event": [{
-        "listen": "test",
-        "script": { "exec": [
-          "pm.test('200 OK', () => pm.response.to.have.status(200));",
-          "pm.collectionVariables.set('accessToken', pm.response.json().accessToken);"
-        ] }
-      }],
-      "request": { "auth": { "type": "noauth" }, "method": "POST", "url": "{{baseUrl}}/api/auth/refresh" }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('200 OK', () => pm.response.to.have.status(200));",
+              "pm.collectionVariables.set('accessToken', pm.response.json().accessToken);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "url": "{{baseUrl}}/api/auth/refresh"
+      }
     },
     {
       "name": "5. Logout",
-      "event": [{
-        "listen": "test",
-        "script": { "exec": ["pm.test('204 No Content', () => pm.response.to.have.status(204));"] }
-      }],
-      "request": { "auth": { "type": "noauth" }, "method": "POST", "url": "{{baseUrl}}/api/auth/logout" }
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('204 No Content', () => pm.response.to.have.status(204));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "url": "{{baseUrl}}/api/auth/logout"
+      }
     },
     {
       "name": "6. Login - wrong password (expect 401)",
       "request": {
-        "auth": { "type": "noauth" },
+        "auth": {
+          "type": "noauth"
+        },
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "url": "{{baseUrl}}/api/auth/login",
-        "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"definitely-wrong-123\"\n}" }
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"definitely-wrong-123\"\n}"
+        }
       }
+    },
+    {
+      "name": "Cards & Decks (run Login first)",
+      "item": [
+        {
+          "name": "Search cards: lightning bolt",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/cards?q=lightning bolt&format=modern",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200', () => pm.response.to.have.status(200));",
+                  "const first = pm.response.json().content[0];",
+                  "pm.collectionVariables.set('printingId', first.defaultPrintingId);",
+                  "console.log('Using printing of', first.name);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create deck (Modern)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/decks",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Burn\",\n  \"format\": \"MODERN\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('201', () => pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set('deckId', pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Set 4 copies in main deck",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/decks/{{deckId}}/cards",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"scryfallId\": \"{{printingId}}\",\n  \"board\": \"MAIN\",\n  \"quantity\": 4\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('200', () => pm.response.to.have.status(200));",
+                  "pm.test('not legal yet (only 4 cards)', () => pm.expect(pm.response.json().validation.legal).to.eql(false));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get deck (with validation)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/decks/{{deckId}}"
+          }
+        },
+        {
+          "name": "My decks",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/decks"
+          }
+        },
+        {
+          "name": "Export as text",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/decks/{{deckId}}/export"
+          }
+        },
+        {
+          "name": "Import a text list",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/decks/import",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Imported burn\",\n  \"format\": \"MODERN\",\n  \"list\": \"Deck\\n4 Lightning Bolt\\n4 Goblin Guide\\n20 Mountain\\n\\nSideboard\\n2 Smash to Smithereens\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('201', () => pm.response.to.have.status(201));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete deck",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/decks/{{deckId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('204', () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

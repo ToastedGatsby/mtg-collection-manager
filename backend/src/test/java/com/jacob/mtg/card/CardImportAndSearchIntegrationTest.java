@@ -23,7 +23,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.jacob.mtg.card.importer.CardImportService;
 import com.jacob.mtg.card.importer.CardImportService.ImportResult;
-import com.jacob.mtg.card.scryfall.ScryfallClient;
 
 /**
  * Imports a small Scryfall-shaped fixture (src/test/resources/scryfall/sample-cards.json) and checks the
@@ -166,19 +165,6 @@ class CardImportAndSearchIntegrationTest {
         }
         mvc.perform(get("/api/cards/" + BOLT_ORACLE_ID + "/printings"))
             .andExpect(jsonPath("$", hasSize(2)));
-    }
-
-    /** Scryfall's current bulk format: a .jsonl.gz file, one card per line (not a JSON array). */
-    @Test
-    void importsScryfallsGzippedJsonLinesFormat() throws Exception {
-        try (InputStream gz = getClass().getResourceAsStream("/scryfall/sample-cards.jsonl.gz");
-             InputStream jsonLines = ScryfallClient.decompressIfGzip(gz)) {
-            ImportResult result = importService.importFrom(jsonLines);
-            assertThat(result.imported()).isEqualTo(9);
-            assertThat(result.skipped()).isEqualTo(2);
-        }
-        mvc.perform(get("/api/cards").param("q", "testcard"))
-            .andExpect(jsonPath("$.totalElements").value(7));
     }
 
     @Test
