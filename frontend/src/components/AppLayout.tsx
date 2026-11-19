@@ -1,4 +1,5 @@
-import { Link, NavLink, Outlet } from 'react-router'
+import { Link, NavLink, Outlet, useNavigate } from 'react-router'
+import { useAuth } from '../auth/authContext'
 
 const navClass = ({ isActive }: { isActive: boolean }) =>
   `px-3 py-2 rounded-md text-sm font-medium transition ${
@@ -15,14 +16,8 @@ export default function AppLayout() {
           </Link>
           <NavLink to="/deckbuilder" className={navClass}>Deckbuilder</NavLink>
           <NavLink to="/collection" className={navClass}>Colecție</NavLink>
-          <div className="ml-auto flex gap-2">
-            <NavLink to="/login" className={navClass}>Login</NavLink>
-            <Link
-              to="/register"
-              className="rounded-md bg-accent px-3 py-2 text-sm font-semibold text-surface hover:brightness-110"
-            >
-              Creează cont
-            </Link>
+          <div className="ml-auto flex items-center gap-2">
+            <AccountArea />
           </div>
         </nav>
       </header>
@@ -33,6 +28,50 @@ export default function AppLayout() {
 
       <Footer />
     </div>
+  )
+}
+
+function AccountArea() {
+  const { status, user, logout } = useAuth()
+  const navigate = useNavigate()
+
+  if (status === 'loading') {
+    return <span className="h-8 w-24 animate-pulse rounded-md bg-surface-3" aria-hidden />
+  }
+
+  if (status === 'authenticated' && user) {
+    return (
+      <>
+        <span className="text-sm text-zinc-300">
+          Salut, <span className="font-semibold text-white">{user.displayName}</span>
+          {user.role === 'DEMO' && (
+            <span className="ml-2 rounded bg-accent/20 px-1.5 py-0.5 text-xs text-accent">DEMO</span>
+          )}
+        </span>
+        <button
+          type="button"
+          onClick={async () => {
+            await logout()
+            navigate('/')
+          }}
+          className="rounded-md px-3 py-2 text-sm text-zinc-300 hover:bg-surface-3 hover:text-white"
+        >
+          Logout
+        </button>
+      </>
+    )
+  }
+
+  return (
+    <>
+      <NavLink to="/login" className={navClass}>Login</NavLink>
+      <Link
+        to="/register"
+        className="rounded-md bg-accent px-3 py-2 text-sm font-semibold text-surface hover:brightness-110"
+      >
+        Creează cont
+      </Link>
+    </>
   )
 }
 
