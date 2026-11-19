@@ -12,9 +12,11 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 /**
@@ -46,6 +48,18 @@ public class GlobalExceptionHandler {
                 (first, second) -> first));
         problem.setProperty("errors", errors);
         return problem;
+    }
+
+    /** e.g. /api/cards/not-a-uuid */
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    ProblemDetail handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Invalid value for '" + ex.getName() + "'");
+    }
+
+    /** e.g. /api/cards?cmcMin=abc (query parameters bound to a record) */
+    @ExceptionHandler(BindException.class)
+    ProblemDetail handleBind(BindException ex) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Invalid query parameters");
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)

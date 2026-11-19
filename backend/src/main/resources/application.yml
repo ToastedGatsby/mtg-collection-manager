@@ -47,6 +47,12 @@ app:
     base-url: https://api.scryfall.com
     # Scryfall requires a descriptive User-Agent + Accept header on every request
     user-agent: MTGVault/0.1 (personal portfolio project)
+    # "default_cards" = every printing, in English (or its only printed language), ~100k objects
+    bulk-type: default_cards
+    # first start with an empty card table -> import automatically in the background
+    import-on-startup: ${SCRYFALL_IMPORT_ON_STARTUP:true}
+    # Scryfall regenerates bulk files every ~12h; check once a night
+    import-cron: "0 15 4 * * *"
 
 management:
   endpoints:

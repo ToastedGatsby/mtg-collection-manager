@@ -1,0 +1,718 @@
+[
+ {
+  "object": "card",
+  "id": "00000000-0000-4000-8000-000000000001",
+  "oracle_id": "00000000-0000-4000-9000-000000000001",
+  "name": "Testcard Bolt",
+  "lang": "en",
+  "layout": "normal",
+  "digital": false,
+  "promo": false,
+  "oversized": false,
+  "border_color": "black",
+  "finishes": [
+   "nonfoil",
+   "foil"
+  ],
+  "games": [
+   "paper"
+  ],
+  "set": "tst",
+  "set_name": "Test Set",
+  "collector_number": "1",
+  "released_at": "2010-01-01",
+  "image_uris": {
+   "small": "https://cards.scryfall.io/small/front/t1.jpg",
+   "normal": "https://cards.scryfall.io/normal/front/t1.jpg",
+   "large": "https://cards.scryfall.io/large/front/t1.jpg",
+   "art_crop": "https://cards.scryfall.io/art_crop/front/t1.jpg"
+  },
+  "purchase_uris": {
+   "tcgplayer": "https://www.tcgplayer.com/product/1",
+   "cardmarket": "https://www.cardmarket.com/en/Magic/Products/Singles/1",
+   "cardhoarder": "https://www.cardhoarder.com/cards/1"
+  },
+  "tcgplayer_id": 1001,
+  "cardmarket_id": 2001,
+  "prices": {
+   "usd": "1.50",
+   "usd_foil": "4.00",
+   "usd_etched": null,
+   "eur": "1.20",
+   "eur_foil": "3.50",
+   "tix": "0.03"
+  },
+  "keywords": [],
+  "mana_cost": "{R}",
+  "cmc": 1.0,
+  "type_line": "Instant",
+  "oracle_text": "Testcard Bolt deals 3 damage to any target.",
+  "colors": [
+   "R"
+  ],
+  "color_identity": [
+   "R"
+  ],
+  "rarity": "common",
+  "legalities": {
+   "standard": "not_legal",
+   "pioneer": "not_legal",
+   "modern": "legal",
+   "legacy": "legal",
+   "vintage": "legal",
+   "pauper": "legal",
+   "commander": "legal"
+  }
+ },
+ {
+  "object": "card",
+  "id": "00000000-0000-4000-8000-000000000002",
+  "oracle_id": "00000000-0000-4000-9000-000000000001",
+  "name": "Testcard Bolt",
+  "lang": "en",
+  "layout": "normal",
+  "digital": false,
+  "promo": true,
+  "oversized": false,
+  "border_color": "black",
+  "finishes": [
+   "nonfoil",
+   "foil"
+  ],
+  "games": [
+   "paper"
+  ],
+  "set": "tpr",
+  "set_name": "Test Promos",
+  "collector_number": "2",
+  "released_at": "2024-06-01",
+  "image_uris": {
+   "small": "https://cards.scryfall.io/small/front/t2.jpg",
+   "normal": "https://cards.scryfall.io/normal/front/t2.jpg",
+   "large": "https://cards.scryfall.io/large/front/t2.jpg",
+   "art_crop": "https://cards.scryfall.io/art_crop/front/t2.jpg"
+  },
+  "purchase_uris": {
+   "tcgplayer": "https://www.tcgplayer.com/product/2",
+   "cardmarket": "https://www.cardmarket.com/en/Magic/Products/Singles/2",
+   "cardhoarder": "https://www.cardhoarder.com/cards/2"
+  },
+  "tcgplayer_id": 1002,
+  "cardmarket_id": 2002,
+  "prices": {
+   "usd": "12.00",
+   "usd_foil": null,
+   "usd_etched": null,
+   "eur": "9.99",
+   "eur_foil": null,
+   "tix": null
+  },
+  "keywords": [],
+  "mana_cost": "{R}",
+  "cmc": 1.0,
+  "type_line": "Instant",
+  "oracle_text": "Testcard Bolt deals 3 damage to any target.",
+  "colors": [
+   "R"
+  ],
+  "color_identity": [
+   "R"
+  ],
+  "rarity": "uncommon",
+  "legalities": {
+   "standard": "not_legal",
+   "pioneer": "not_legal",
+   "modern": "legal",
+   "legacy": "legal",
+   "vintage": "legal",
+   "pauper": "legal",
+   "commander": "legal"
+  }
+ },
+ {
+  "object": "card",
+  "id": "00000000-0000-4000-8000-000000000003",
+  "oracle_id": "00000000-0000-4000-9000-000000000002",
+  "name": "Testcard Counterspell",
+  "lang": "en",
+  "layout": "normal",
+  "digital": false,
+  "promo": false,
+  "oversized": false,
+  "border_color": "black",
+  "finishes": [
+   "nonfoil",
+   "foil"
+  ],
+  "games": [
+   "paper"
+  ],
+  "set": "tst",
+  "set_name": "Test Set",
+  "collector_number": "3",
+  "released_at": "2010-01-01",
+  "image_uris": {
+   "small": "https://cards.scryfall.io/small/front/t3.jpg",
+   "normal": "https://cards.scryfall.io/normal/front/t3.jpg",
+   "large": "https://cards.scryfall.io/large/front/t3.jpg",
+   "art_crop": "https://cards.scryfall.io/art_crop/front/t3.jpg"
+  },
+  "purchase_uris": {
+   "tcgplayer": "https://www.tcgplayer.com/product/3",
+   "cardmarket": "https://www.cardmarket.com/en/Magic/Products/Singles/3",
+   "cardhoarder": "https://www.cardhoarder.com/cards/3"
+  },
+  "tcgplayer_id": 1003,
+  "cardmarket_id": 2003,
+  "prices": {
+   "usd": "0.80",
+   "eur": "0.60"
+  },
+  "keywords": [],
+  "mana_cost": "{U}{U}",
+  "cmc": 2.0,
+  "type_line": "Instant",
+  "oracle_text": "Counter target spell.",
+  "colors": [
+   "U"
+  ],
+  "color_identity": [
+   "U"
+  ],
+  "rarity": "uncommon",
+  "legalities": {
+   "standard": "not_legal",
+   "pioneer": "not_legal",
+   "modern": "not_legal",
+   "legacy": "legal",
+   "vintage": "legal",
+   "pauper": "legal",
+   "commander": "legal"
+  }
+ },
+ {
+  "object": "card",
+  "id": "00000000-0000-4000-8000-000000000004",
+  "oracle_id": "00000000-0000-4000-9000-000000000003",
+  "name": "Testcard Delver // Testcard Aberration",
+  "lang": "en",
+  "layout": "transform",
+  "digital": false,
+  "promo": false,
+  "border_color": "black",
+  "finishes": [
+   "nonfoil"
+  ],
+  "set": "tst",
+  "set_name": "Test Set",
+  "collector_number": "4",
+  "released_at": "2011-09-30",
+  "cmc": 1.0,
+  "type_line": "Creature — Human Wizard // Creature — Human Insect",
+  "color_identity": [
+   "U"
+  ],
+  "keywords": [
+   "Transform",
+   "Flying"
+  ],
+  "rarity": "rare",
+  "legalities": {
+   "standard": "not_legal",
+   "pioneer": "not_legal",
+   "modern": "legal",
+   "legacy": "legal",
+   "vintage": "legal",
+   "pauper": "legal",
+   "commander": "legal"
+  },
+  "prices": {
+   "usd": "0.30",
+   "eur": "0.25"
+  },
+  "purchase_uris": {
+   "tcgplayer": "https://www.tcgplayer.com/product/4",
+   "cardmarket": "https://www.cardmarket.com/en/Magic/Products/Singles/4",
+   "cardhoarder": "https://www.cardhoarder.com/cards/4"
+  },
+  "card_faces": [
+   {
+    "object": "card_face",
+    "name": "Testcard Delver",
+    "mana_cost": "{U}",
+    "type_line": "Creature — Human Wizard",
+    "oracle_text": "At the beginning of your upkeep, look at the top card of your library.",
+    "colors": [
+     "U"
+    ],
+    "image_uris": {
+     "small": "https://cards.scryfall.io/small/front/t4a.jpg",
+     "normal": "https://cards.scryfall.io/normal/front/t4a.jpg",
+     "large": "https://cards.scryfall.io/large/front/t4a.jpg",
+     "art_crop": "https://cards.scryfall.io/art_crop/front/t4a.jpg"
+    }
+   },
+   {
+    "object": "card_face",
+    "name": "Testcard Aberration",
+    "mana_cost": "",
+    "type_line": "Creature — Human Insect",
+    "oracle_text": "Flying",
+    "colors": [
+     "U"
+    ],
+    "image_uris": {
+     "small": "https://cards.scryfall.io/small/front/t4b.jpg",
+     "normal": "https://cards.scryfall.io/normal/front/t4b.jpg",
+     "large": "https://cards.scryfall.io/large/front/t4b.jpg",
+     "art_crop": "https://cards.scryfall.io/art_crop/front/t4b.jpg"
+    }
+   }
+  ]
+ },
+ {
+  "object": "card",
+  "id": "00000000-0000-4000-8000-000000000005",
+  "oracle_id": "00000000-0000-4000-9000-000000000004",
+  "name": "Testcard Elves",
+  "lang": "en",
+  "layout": "normal",
+  "digital": false,
+  "promo": false,
+  "oversized": false,
+  "border_color": "black",
+  "finishes": [
+   "nonfoil",
+   "foil"
+  ],
+  "games": [
+   "paper"
+  ],
+  "set": "tst",
+  "set_name": "Test Set",
+  "collector_number": "5",
+  "released_at": "2010-01-01",
+  "image_uris": {
+   "small": "https://cards.scryfall.io/small/front/t5.jpg",
+   "normal": "https://cards.scryfall.io/normal/front/t5.jpg",
+   "large": "https://cards.scryfall.io/large/front/t5.jpg",
+   "art_crop": "https://cards.scryfall.io/art_crop/front/t5.jpg"
+  },
+  "purchase_uris": {
+   "tcgplayer": "https://www.tcgplayer.com/product/5",
+   "cardmarket": "https://www.cardmarket.com/en/Magic/Products/Singles/5",
+   "cardhoarder": "https://www.cardhoarder.com/cards/5"
+  },
+  "tcgplayer_id": 1005,
+  "cardmarket_id": 2005,
+  "prices": {
+   "usd": "0.25",
+   "eur": "0.15"
+  },
+  "keywords": [],
+  "mana_cost": "{G}",
+  "cmc": 1.0,
+  "type_line": "Creature — Elf Druid",
+  "oracle_text": "{T}: Add {G}.",
+  "colors": [
+   "G"
+  ],
+  "color_identity": [
+   "G"
+  ],
+  "rarity": "common",
+  "legalities": {
+   "standard": "legal",
+   "pioneer": "legal",
+   "modern": "legal",
+   "legacy": "legal",
+   "vintage": "legal",
+   "pauper": "legal",
+   "commander": "legal"
+  }
+ },
+ {
+  "object": "card",
+  "id": "00000000-0000-4000-8000-000000000006",
+  "oracle_id": "00000000-0000-4000-9000-000000000005",
+  "name": "Testcard Ring",
+  "lang": "en",
+  "layout": "normal",
+  "digital": false,
+  "promo": false,
+  "oversized": false,
+  "border_color": "black",
+  "finishes": [
+   "nonfoil",
+   "foil"
+  ],
+  "games": [
+   "paper"
+  ],
+  "set": "tst",
+  "set_name": "Test Set",
+  "collector_number": "6",
+  "released_at": "2010-01-01",
+  "image_uris": {
+   "small": "https://cards.scryfall.io/small/front/t6.jpg",
+   "normal": "https://cards.scryfall.io/normal/front/t6.jpg",
+   "large": "https://cards.scryfall.io/large/front/t6.jpg",
+   "art_crop": "https://cards.scryfall.io/art_crop/front/t6.jpg"
+  },
+  "purchase_uris": {
+   "tcgplayer": "https://www.tcgplayer.com/product/6",
+   "cardmarket": "https://www.cardmarket.com/en/Magic/Products/Singles/6",
+   "cardhoarder": "https://www.cardhoarder.com/cards/6"
+  },
+  "tcgplayer_id": 1006,
+  "cardmarket_id": 2006,
+  "prices": {
+   "usd": "2.00",
+   "eur": "1.50"
+  },
+  "keywords": [],
+  "mana_cost": "{1}",
+  "cmc": 1.0,
+  "type_line": "Artifact",
+  "oracle_text": "{T}: Add {C}{C}.",
+  "colors": [],
+  "color_identity": [],
+  "rarity": "uncommon",
+  "legalities": {
+   "standard": "not_legal",
+   "pioneer": "not_legal",
+   "modern": "not_legal",
+   "legacy": "banned",
+   "vintage": "restricted",
+   "pauper": "not_legal",
+   "commander": "legal"
+  }
+ },
+ {
+  "object": "card",
+  "id": "00000000-0000-4000-8000-000000000007",
+  "oracle_id": "00000000-0000-4000-9000-000000000006",
+  "name": "Testcard Fire // Testcard Ice",
+  "lang": "en",
+  "layout": "split",
+  "digital": false,
+  "promo": false,
+  "border_color": "black",
+  "finishes": [
+   "nonfoil",
+   "foil"
+  ],
+  "set": "tst",
+  "set_name": "Test Set",
+  "collector_number": "7",
+  "released_at": "2001-04-01",
+  "mana_cost": "{1}{R} // {1}{U}",
+  "cmc": 4.0,
+  "type_line": "Instant // Instant",
+  "colors": [
+   "R",
+   "U"
+  ],
+  "color_identity": [
+   "R",
+   "U"
+  ],
+  "keywords": [],
+  "rarity": "uncommon",
+  "image_uris": {
+   "small": "https://cards.scryfall.io/small/front/t7.jpg",
+   "normal": "https://cards.scryfall.io/normal/front/t7.jpg",
+   "large": "https://cards.scryfall.io/large/front/t7.jpg",
+   "art_crop": "https://cards.scryfall.io/art_crop/front/t7.jpg"
+  },
+  "legalities": {
+   "standard": "not_legal",
+   "pioneer": "not_legal",
+   "modern": "legal",
+   "legacy": "legal",
+   "vintage": "legal",
+   "pauper": "not_legal",
+   "commander": "legal"
+  },
+  "prices": {
+   "usd": "0.50",
+   "eur": "0.40"
+  },
+  "purchase_uris": {
+   "tcgplayer": "https://www.tcgplayer.com/product/7",
+   "cardmarket": "https://www.cardmarket.com/en/Magic/Products/Singles/7",
+   "cardhoarder": "https://www.cardhoarder.com/cards/7"
+  },
+  "card_faces": [
+   {
+    "object": "card_face",
+    "name": "Testcard Fire",
+    "mana_cost": "{1}{R}",
+    "type_line": "Instant",
+    "oracle_text": "Fire deals 2 damage divided as you choose."
+   },
+   {
+    "object": "card_face",
+    "name": "Testcard Ice",
+    "mana_cost": "{1}{U}",
+    "type_line": "Instant",
+    "oracle_text": "Tap target permanent. Draw a card."
+   }
+  ]
+ },
+ {
+  "object": "card",
+  "id": "00000000-0000-4000-8000-000000000008",
+  "oracle_id": "00000000-0000-4000-9000-000000000007",
+  "name": "Testcard Goblin",
+  "lang": "en",
+  "layout": "token",
+  "digital": false,
+  "promo": false,
+  "oversized": false,
+  "border_color": "black",
+  "finishes": [
+   "nonfoil",
+   "foil"
+  ],
+  "games": [
+   "paper"
+  ],
+  "set": "tst",
+  "set_name": "Test Set",
+  "collector_number": "8",
+  "released_at": "2010-01-01",
+  "image_uris": {
+   "small": "https://cards.scryfall.io/small/front/t8.jpg",
+   "normal": "https://cards.scryfall.io/normal/front/t8.jpg",
+   "large": "https://cards.scryfall.io/large/front/t8.jpg",
+   "art_crop": "https://cards.scryfall.io/art_crop/front/t8.jpg"
+  },
+  "purchase_uris": {
+   "tcgplayer": "https://www.tcgplayer.com/product/8",
+   "cardmarket": "https://www.cardmarket.com/en/Magic/Products/Singles/8",
+   "cardhoarder": "https://www.cardhoarder.com/cards/8"
+  },
+  "tcgplayer_id": 1008,
+  "cardmarket_id": 2008,
+  "prices": {
+   "usd": null,
+   "usd_foil": null,
+   "usd_etched": null,
+   "eur": null,
+   "eur_foil": null,
+   "tix": null
+  },
+  "keywords": [],
+  "type_line": "Token Creature — Goblin",
+  "colors": [
+   "R"
+  ],
+  "color_identity": [
+   "R"
+  ],
+  "rarity": "common",
+  "cmc": 0.0,
+  "legalities": {
+   "standard": "not_legal",
+   "pioneer": "not_legal",
+   "modern": "not_legal",
+   "legacy": "not_legal",
+   "vintage": "not_legal",
+   "pauper": "not_legal",
+   "commander": "not_legal"
+  }
+ },
+ {
+  "object": "card",
+  "id": "00000000-0000-4000-8000-000000000009",
+  "oracle_id": "00000000-0000-4000-9000-000000000008",
+  "name": "Testcard Digital",
+  "lang": "en",
+  "layout": "normal",
+  "digital": true,
+  "promo": false,
+  "oversized": false,
+  "border_color": "black",
+  "finishes": [
+   "nonfoil",
+   "foil"
+  ],
+  "games": [
+   "paper"
+  ],
+  "set": "tst",
+  "set_name": "Test Set",
+  "collector_number": "9",
+  "released_at": "2010-01-01",
+  "image_uris": {
+   "small": "https://cards.scryfall.io/small/front/t9.jpg",
+   "normal": "https://cards.scryfall.io/normal/front/t9.jpg",
+   "large": "https://cards.scryfall.io/large/front/t9.jpg",
+   "art_crop": "https://cards.scryfall.io/art_crop/front/t9.jpg"
+  },
+  "purchase_uris": {
+   "tcgplayer": "https://www.tcgplayer.com/product/9",
+   "cardmarket": "https://www.cardmarket.com/en/Magic/Products/Singles/9",
+   "cardhoarder": "https://www.cardhoarder.com/cards/9"
+  },
+  "tcgplayer_id": 1009,
+  "cardmarket_id": 2009,
+  "prices": {
+   "usd": null,
+   "usd_foil": null,
+   "usd_etched": null,
+   "eur": null,
+   "eur_foil": null,
+   "tix": null
+  },
+  "keywords": [],
+  "mana_cost": "{B}",
+  "cmc": 1.0,
+  "type_line": "Instant",
+  "colors": [
+   "B"
+  ],
+  "color_identity": [
+   "B"
+  ],
+  "rarity": "rare",
+  "legalities": {
+   "standard": "not_legal",
+   "pioneer": "not_legal",
+   "modern": "not_legal",
+   "legacy": "not_legal",
+   "vintage": "not_legal",
+   "pauper": "not_legal",
+   "commander": "not_legal"
+  }
+ },
+ {
+  "object": "card",
+  "id": "00000000-0000-4000-8000-000000000010",
+  "oracle_id": "00000000-0000-4000-9000-000000000009",
+  "name": "Testcard Dragon",
+  "lang": "en",
+  "layout": "normal",
+  "digital": false,
+  "promo": false,
+  "oversized": false,
+  "border_color": "black",
+  "finishes": [
+   "nonfoil",
+   "foil"
+  ],
+  "games": [
+   "paper"
+  ],
+  "set": "tst",
+  "set_name": "Test Set",
+  "collector_number": "10",
+  "released_at": "2015-01-01",
+  "image_uris": {
+   "small": "https://cards.scryfall.io/small/front/t10.jpg",
+   "normal": "https://cards.scryfall.io/normal/front/t10.jpg",
+   "large": "https://cards.scryfall.io/large/front/t10.jpg",
+   "art_crop": "https://cards.scryfall.io/art_crop/front/t10.jpg"
+  },
+  "purchase_uris": {
+   "tcgplayer": "https://www.tcgplayer.com/product/10",
+   "cardmarket": "https://www.cardmarket.com/en/Magic/Products/Singles/10",
+   "cardhoarder": "https://www.cardhoarder.com/cards/10"
+  },
+  "tcgplayer_id": 1010,
+  "cardmarket_id": 2010,
+  "prices": {
+   "usd": "25.00",
+   "eur": "22.00"
+  },
+  "keywords": [
+   "Flying",
+   "Haste"
+  ],
+  "mana_cost": "{4}{R}{R}",
+  "cmc": 6.0,
+  "type_line": "Legendary Creature — Dragon",
+  "oracle_text": "Flying, haste",
+  "colors": [
+   "R"
+  ],
+  "color_identity": [
+   "R"
+  ],
+  "rarity": "mythic",
+  "legalities": {
+   "standard": "not_legal",
+   "pioneer": "not_legal",
+   "modern": "legal",
+   "legacy": "legal",
+   "vintage": "legal",
+   "pauper": "not_legal",
+   "commander": "legal"
+  }
+ },
+ {
+  "object": "card",
+  "id": "00000000-0000-4000-8000-000000000011",
+  "oracle_id": "00000000-0000-4000-9000-000000000009",
+  "name": "Testcard Dragon",
+  "lang": "en",
+  "layout": "normal",
+  "digital": false,
+  "promo": false,
+  "oversized": false,
+  "border_color": "borderless",
+  "finishes": [
+   "nonfoil",
+   "foil"
+  ],
+  "games": [
+   "paper"
+  ],
+  "set": "tsl",
+  "set_name": "Test Secret Lair",
+  "collector_number": "11",
+  "released_at": "2023-01-01",
+  "image_uris": {
+   "small": "https://cards.scryfall.io/small/front/t11.jpg",
+   "normal": "https://cards.scryfall.io/normal/front/t11.jpg",
+   "large": "https://cards.scryfall.io/large/front/t11.jpg",
+   "art_crop": "https://cards.scryfall.io/art_crop/front/t11.jpg"
+  },
+  "purchase_uris": {
+   "tcgplayer": "https://www.tcgplayer.com/product/11",
+   "cardmarket": "https://www.cardmarket.com/en/Magic/Products/Singles/11",
+   "cardhoarder": "https://www.cardhoarder.com/cards/11"
+  },
+  "tcgplayer_id": 1011,
+  "cardmarket_id": 2011,
+  "prices": {
+   "usd": "60.00",
+   "eur": "55.00"
+  },
+  "keywords": [
+   "Flying",
+   "Haste"
+  ],
+  "mana_cost": "{4}{R}{R}",
+  "cmc": 6.0,
+  "type_line": "Legendary Creature — Dragon",
+  "oracle_text": "Flying, haste",
+  "colors": [
+   "R"
+  ],
+  "color_identity": [
+   "R"
+  ],
+  "rarity": "mythic",
+  "legalities": {
+   "standard": "not_legal",
+   "pioneer": "not_legal",
+   "modern": "legal",
+   "legacy": "legal",
+   "vintage": "legal",
+   "pauper": "not_legal",
+   "commander": "legal"
+  }
+ }
+]
