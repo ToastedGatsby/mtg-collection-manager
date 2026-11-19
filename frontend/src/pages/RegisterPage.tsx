@@ -82,8 +82,8 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="mx-auto max-w-sm space-y-4 rounded-lg border border-surface-3 bg-surface-2 p-6">
-      <h1 className="text-xl font-semibold text-white">Creează cont</h1>
+    <div className="tome mx-auto max-w-sm space-y-4 p-6">
+      <h1 className="font-serif text-3xl text-parchment">Creează cont</h1>
 
       {error && (
         <p role="alert" className="rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-300">
@@ -130,7 +130,7 @@ export default function RegisterPage() {
         />
 
         <div className="space-y-1">
-          <label className="flex items-start gap-2 text-xs text-zinc-400">
+          <label className="flex items-start gap-2 text-xs text-stone-400">
             <input
               type="checkbox"
               className="mt-0.5 accent-accent"
@@ -156,7 +156,7 @@ export default function RegisterPage() {
         </button>
       </form>
 
-      <p className="text-center text-xs text-zinc-400">
+      <p className="text-center text-xs text-stone-400">
         Ai deja cont? <Link to="/login" className="text-accent underline">Autentifică-te</Link>
       </p>
     </div>

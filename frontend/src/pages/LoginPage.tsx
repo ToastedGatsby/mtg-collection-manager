@@ -42,8 +42,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="mx-auto max-w-sm space-y-4 rounded-lg border border-surface-3 bg-surface-2 p-6">
-      <h1 className="text-xl font-semibold text-white">Autentificare</h1>
+    <div className="tome mx-auto max-w-sm space-y-4 p-6">
+      <h1 className="font-serif text-3xl text-parchment">Autentificare</h1>
 
       {error && (
         <p role="alert" className="rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-300">
@@ -88,7 +88,7 @@ export default function LoginPage() {
         Intră cu contul demo (în curând)
       </button>
 
-      <p className="text-center text-xs text-zinc-400">
+      <p className="text-center text-xs text-stone-400">
         Nu ai cont? <Link to="/register" className="text-accent underline">Creează unul</Link>
       </p>
     </div>

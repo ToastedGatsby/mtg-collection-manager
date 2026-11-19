@@ -16,7 +16,7 @@ export function shortPrice(prices: Prices): string | null {
 }
 
 export const RARITY_COLOR: Record<string, string> = {
-  common: 'text-zinc-300',
+  common: 'text-stone-300',
   uncommon: 'text-slate-300',
   rare: 'text-amber-300',
   mythic: 'text-orange-400',

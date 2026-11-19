@@ -1,20 +1,23 @@
-import { Link, NavLink, Outlet, useNavigate } from 'react-router'
+import { Link, NavLink, Outlet, useMatch, useNavigate } from 'react-router'
 import { useAuth } from '../auth/authContext'
 
+// active link: brass text with a thin brass underline, like a bookmark ribbon
 const navClass = ({ isActive }: { isActive: boolean }) =>
-  `px-3 py-2 rounded-md text-sm font-medium transition ${
-    isActive ? 'bg-surface-3 text-accent' : 'text-zinc-300 hover:bg-surface-2 hover:text-white'
+  `px-1 py-1 font-serif text-[17px] border-b-2 transition ${
+    isActive ? 'border-accent text-accent' : 'border-transparent text-stone-300 hover:text-parchment'
   }`
 
 export default function AppLayout() {
+  // the deck editor needs the whole screen width
+  const wide = useMatch('/decks/:deckId') !== null
   return (
     <div className="flex min-h-full flex-col">
-      <header className="border-b border-surface-3 bg-surface-2">
-        <nav className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-3">
-          <Link to="/" className="mr-6 font-display text-lg font-bold tracking-wide text-accent">
+      <header className="border-b border-accent/25 bg-surface-2/80">
+        <nav className={`mx-auto flex items-center gap-6 px-4 py-2.5 ${wide ? 'max-w-none' : 'max-w-7xl'}`}>
+          <Link to="/" className="mr-4 font-display text-2xl leading-none text-parchment drop-shadow-[0_1px_0_rgb(0_0_0/0.6)]">
             MTG Vault
           </Link>
-          <NavLink to="/deckbuilder" className={navClass}>Deckbuilder</NavLink>
+          <NavLink to="/decks" className={navClass}>Deckuri</NavLink>
           <NavLink to="/collection" className={navClass}>Colecție</NavLink>
           <div className="ml-auto flex items-center gap-2">
             <AccountArea />
@@ -22,7 +25,7 @@ export default function AppLayout() {
         </nav>
       </header>
 
-      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6">
+      <main className={`mx-auto w-full flex-1 px-4 ${wide ? 'max-w-none py-4' : 'max-w-7xl py-8'}`}>
         <Outlet />
       </main>
 
@@ -42,7 +45,7 @@ function AccountArea() {
   if (status === 'authenticated' && user) {
     return (
       <>
-        <span className="text-sm text-zinc-300">
+        <span className="text-sm text-stone-300">
           Salut, <span className="font-semibold text-white">{user.displayName}</span>
           {user.role === 'DEMO' && (
             <span className="ml-2 rounded bg-accent/20 px-1.5 py-0.5 text-xs text-accent">DEMO</span>
@@ -54,7 +57,7 @@ function AccountArea() {
             await logout()
             navigate('/')
           }}
-          className="rounded-md px-3 py-2 text-sm text-zinc-300 hover:bg-surface-3 hover:text-white"
+          className="rounded-md px-3 py-2 text-sm text-stone-300 hover:bg-surface-3 hover:text-white"
         >
           Logout
         </button>
@@ -77,7 +80,7 @@ function AccountArea() {
 
 function Footer() {
   return (
-    <footer className="border-t border-surface-3 bg-surface-2 text-xs text-zinc-400">
+    <footer className="border-t border-surface-3 bg-surface-2 text-xs text-stone-400">
       <div className="mx-auto max-w-7xl space-y-2 px-4 py-5">
         <div className="flex flex-wrap gap-4">
           <Link to="/legal/terms" className="hover:text-white">Termeni și condiții</Link>

@@ -12,7 +12,7 @@ export default function FormField({ label, error, hint, id, ...input }: Props) {
   const describedBy = error ? `${fieldId}-error` : hint ? `${fieldId}-hint` : undefined
   return (
     <div className="space-y-1">
-      <label htmlFor={fieldId} className="block text-xs font-medium text-zinc-300">
+      <label htmlFor={fieldId} className="block text-xs font-medium text-stone-300">
         {label}
       </label>
       <input
@@ -27,7 +27,7 @@ export default function FormField({ label, error, hint, id, ...input }: Props) {
       {error ? (
         <p id={`${fieldId}-error`} className="text-xs text-red-400">{error}</p>
       ) : hint ? (
-        <p id={`${fieldId}-hint`} className="text-xs text-zinc-500">{hint}</p>
+        <p id={`${fieldId}-hint`} className="text-xs text-stone-500">{hint}</p>
       ) : null}
     </div>
   )

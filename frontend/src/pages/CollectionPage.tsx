@@ -15,7 +15,7 @@ export default function CollectionPage() {
           </button>
         ))}
       </aside>
-      <section className="rounded-lg border border-surface-3 bg-surface-2 p-4 text-sm text-zinc-500">
+      <section className="rounded-lg border border-surface-3 bg-surface-2 p-4 text-sm text-stone-500">
         Tabelul cu cărțile din container (nume, set, stare, foil, cantitate, preț) apare aici.
       </section>
     </div>

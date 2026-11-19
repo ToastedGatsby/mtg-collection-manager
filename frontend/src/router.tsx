@@ -1,8 +1,9 @@
-import { createBrowserRouter } from 'react-router'
+import { createBrowserRouter, Navigate } from 'react-router'
 import AppLayout from './components/AppLayout'
 import ProtectedRoute from './components/ProtectedRoute'
 import HomePage from './pages/HomePage'
-import DeckbuilderPage from './pages/DeckbuilderPage'
+import DecksPage from './pages/DecksPage'
+import DeckEditorPage from './pages/DeckEditorPage'
 import CollectionPage from './pages/CollectionPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
@@ -22,7 +23,9 @@ export const router = createBrowserRouter([
         // everything below requires a logged-in user
         element: <ProtectedRoute />,
         children: [
-          { path: 'deckbuilder', element: <DeckbuilderPage /> },
+          { path: 'decks', element: <DecksPage /> },
+          { path: 'decks/:deckId', element: <DeckEditorPage /> },
+          { path: 'deckbuilder', element: <Navigate to="/decks" replace /> },
           { path: 'collection', element: <CollectionPage /> },
         ],
       },

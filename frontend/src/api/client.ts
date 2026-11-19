@@ -119,6 +119,18 @@ export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
   return parse<T>(res)
 }
 
+/** Like api(), for endpoints that return plain text (e.g. deck export). */
+export async function apiText(path: string): Promise<string> {
+  let res = await send(path, { headers: { Accept: 'text/plain' } }, true)
+  if (res.status === 401) {
+    const refreshed = await refreshSession()
+    if (refreshed) res = await send(path, { headers: { Accept: 'text/plain' } }, true)
+    else onSessionExpired?.()
+  }
+  if (!res.ok) throw new ApiError(res.status, res.statusText)
+  return res.text()
+}
+
 export interface HealthResponse {
   status: string
   database: string

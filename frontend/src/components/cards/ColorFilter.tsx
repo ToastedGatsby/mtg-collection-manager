@@ -37,7 +37,7 @@ export default function ColorFilter({ selected, onToggle, mode, onModeChange }: 
       <select
         value={mode}
         onChange={(e) => onModeChange(e.target.value as ColorMode)}
-        className="ml-1 rounded-md bg-surface px-2 py-1 text-xs"
+        className="ml-1 rounded-sm border border-surface-3 bg-surface px-2 py-1 text-sm"
         aria-label="Mod de filtrare a culorilor"
       >
         <option value="including">Include culorile</option>

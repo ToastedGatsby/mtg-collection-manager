@@ -11,8 +11,8 @@ export default function LegalPage() {
   const { doc = '' } = useParams()
   return (
     <article className="max-w-3xl">
-      <h1 className="text-2xl font-semibold text-white">{TITLES[doc] ?? 'Document'}</h1>
-      <p className="mt-2 text-sm text-zinc-400">Versiunea 1.0 · în lucru</p>
+      <h1 className="font-serif text-3xl text-parchment">{TITLES[doc] ?? 'Document'}</h1>
+      <p className="mt-2 text-sm text-stone-400">Versiunea 1.0, în lucru</p>
     </article>
   )
 }

@@ -9,7 +9,7 @@ export default function ManaCost({ cost, size = 16 }: { cost: string | null; siz
     <span className="inline-flex flex-wrap items-center gap-0.5" aria-label={cost}>
       {halves.map((half, h) => (
         <span key={h} className="inline-flex items-center gap-0.5">
-          {h > 0 && <span className="px-0.5 text-zinc-500">//</span>}
+          {h > 0 && <span className="px-0.5 text-stone-500">//</span>}
           {Array.from(half.matchAll(/\{([^}]+)\}/g)).map((m, i) => (
             <img
               key={i}
