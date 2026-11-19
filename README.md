@@ -46,6 +46,22 @@ npm run dev
 # -> http://localhost:5173
 ```
 
+## Authentication
+
+| Endpoint | Auth | Description |
+|---|---|---|
+| `POST /api/auth/register` | public | Create account (requires `acceptTerms: true`, stored in `consent_log`) |
+| `POST /api/auth/login` | public | Returns a 15-min JWT access token; sets a 14-day refresh token in an `HttpOnly` cookie |
+| `POST /api/auth/refresh` | cookie | Rotates the refresh token and returns a new access token |
+| `POST /api/auth/logout` | cookie | Revokes the refresh token, clears the cookie |
+| `GET /api/users/me` | Bearer | Current user |
+
+Security measures: BCrypt (cost 12), JWT HS256 with issuer + expiry validation, refresh-token rotation with
+reuse detection (a replayed token revokes all of the user's sessions), only SHA-256 hashes of refresh tokens
+stored, login lockout per email+IP after 5 failures, generic login errors (no user enumeration), RFC 9457 error bodies.
+
+A Postman collection is in [`postman/`](postman/MTG-Vault.postman_collection.json).
+
 ## Configuration (environment variables)
 
 | Variable       | Default (dev)                            | Purpose                          |
@@ -55,6 +71,8 @@ npm run dev
 | `DB_PASSWORD`  | `mtg_dev_password`                       | DB password                      |
 | `CORS_ORIGINS` | `http://localhost:5173`                  | Allowed frontend origin(s)       |
 | `PORT`         | `8080`                                   | HTTP port (set by host in prod)  |
+| `JWT_SECRET`   | _(dev-only value in application.yml)_    | Base64, ≥32 bytes; **required in prod** (`openssl rand -base64 48`) |
+| `COOKIE_SECURE`| `false`                                  | `true` in prod (refresh cookie over HTTPS only) |
 | `VITE_API_URL` | _(empty: uses Vite proxy)_               | Backend URL for the built SPA    |
 
 ## Legal

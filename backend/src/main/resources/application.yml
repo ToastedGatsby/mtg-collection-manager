@@ -27,6 +27,22 @@ server:
 app:
   cors:
     allowed-origins: ${CORS_ORIGINS:http://localhost:5173}
+  auth:
+    # Base64 of at least 32 random bytes. The default is for LOCAL DEV ONLY:
+    # production must set JWT_SECRET (generate with: openssl rand -base64 48).
+    jwt-secret: ${JWT_SECRET:BpdTzPDCwgioia/xhODqLVHj8i1PykcJGAkjlIddtl6JaiCEOYORb9hlbhvtPsIK}
+    issuer: mtg-vault
+    access-token-ttl: 15m
+    refresh-token-ttl: 14d
+    # false locally (plain http + Postman); true in production (HTTPS only)
+    cookie-secure: ${COOKIE_SECURE:false}
+    cookie-same-site: ${COOKIE_SAME_SITE:Strict}
+    max-login-attempts: 5
+    login-lock-duration: 15m
+  legal:
+    # Bump these when the ToS / Privacy Policy text changes; consent_log stores which version was accepted.
+    tos-version: "1.0"
+    privacy-version: "1.0"
   scryfall:
     base-url: https://api.scryfall.com
     # Scryfall requires a descriptive User-Agent + Accept header on every request

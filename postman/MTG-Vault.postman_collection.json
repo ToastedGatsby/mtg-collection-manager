@@ -1,0 +1,94 @@
+{
+  "info": {
+    "name": "MTG Vault API",
+    "description": "Auth flow for MTG Vault. Run the requests top to bottom. Login/Register save the access token into the collection variable `accessToken`; Postman keeps the HttpOnly refresh cookie automatically.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "email", "value": "jacob.test@example.com" },
+    { "key": "password", "value": "Correct-Horse-Battery-42" },
+    { "key": "accessToken", "value": "" }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{baseUrl}}/api/health" }
+    },
+    {
+      "name": "1. Register",
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('201 Created', () => pm.response.to.have.status(201));",
+          "pm.collectionVariables.set('accessToken', pm.response.json().accessToken);"
+        ] }
+      }],
+      "request": {
+        "auth": { "type": "noauth" },
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/api/auth/register",
+        "body": { "mode": "raw", "raw": "{\n  \"displayName\": \"Jacob\",\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\",\n  \"acceptTerms\": true\n}" }
+      }
+    },
+    {
+      "name": "2. Login",
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('200 OK', () => pm.response.to.have.status(200));",
+          "pm.collectionVariables.set('accessToken', pm.response.json().accessToken);"
+        ] }
+      }],
+      "request": {
+        "auth": { "type": "noauth" },
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/api/auth/login",
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}" }
+      }
+    },
+    {
+      "name": "3. Me (protected)",
+      "event": [{
+        "listen": "test",
+        "script": { "exec": ["pm.test('200 OK', () => pm.response.to.have.status(200));"] }
+      }],
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/users/me" }
+    },
+    {
+      "name": "4. Refresh (uses cookie)",
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('200 OK', () => pm.response.to.have.status(200));",
+          "pm.collectionVariables.set('accessToken', pm.response.json().accessToken);"
+        ] }
+      }],
+      "request": { "auth": { "type": "noauth" }, "method": "POST", "url": "{{baseUrl}}/api/auth/refresh" }
+    },
+    {
+      "name": "5. Logout",
+      "event": [{
+        "listen": "test",
+        "script": { "exec": ["pm.test('204 No Content', () => pm.response.to.have.status(204));"] }
+      }],
+      "request": { "auth": { "type": "noauth" }, "method": "POST", "url": "{{baseUrl}}/api/auth/logout" }
+    },
+    {
+      "name": "6. Login - wrong password (expect 401)",
+      "request": {
+        "auth": { "type": "noauth" },
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/api/auth/login",
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"definitely-wrong-123\"\n}" }
+      }
+    }
+  ]
+}

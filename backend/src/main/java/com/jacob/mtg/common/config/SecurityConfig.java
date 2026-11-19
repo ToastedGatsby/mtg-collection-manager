@@ -12,14 +12,17 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 /**
- * Baseline security. Stateless API: no HTTP session, authentication will come from a
- * short-lived JWT access token (added in the auth module) + rotating refresh token cookie.
+ * Stateless API: no HTTP session. Every protected request must carry
+ * "Authorization: Bearer <JWT>"; Spring Security's resource server checks the
+ * signature, expiry and issuer (beans in auth/JwtConfig) before the controller runs.
  */
 @Configuration
 public class SecurityConfig {
@@ -30,8 +33,8 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            // CSRF is not needed for a bearer-token API. When the refresh token moves into a
-            // cookie, protect /api/auth/refresh with SameSite=Strict + Origin check.
+            // CSRF tokens are not needed: protected endpoints use a bearer header (browsers never add it
+            // automatically) and the refresh cookie is SameSite=Strict + scoped to /api/auth.
             .csrf(AbstractHttpConfigurer::disable)
             .cors(Customizer.withDefaults())
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -43,12 +46,27 @@ public class SecurityConfig {
                     "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; frame-ancestors 'none'"))
                 .frameOptions(f -> f.deny()))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/health", "/actuator/health").permitAll()
-                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/health", "/actuator/health", "/error").permitAll()
+                .requestMatchers(HttpMethod.POST,
+                    "/api/auth/register", "/api/auth/login", "/api/auth/refresh", "/api/auth/logout").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/cards/**", "/api/legal/**").permitAll()
                 .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                .anyRequest().authenticated());
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated())
+            .oauth2ResourceServer(oauth -> oauth
+                .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
         return http.build();
+    }
+
+    /** Turns the token's "roles": ["USER"] claim into Spring authority ROLE_USER (used by hasRole). */
+    private JwtAuthenticationConverter jwtAuthenticationConverter() {
+        JwtGrantedAuthoritiesConverter rolesConverter = new JwtGrantedAuthoritiesConverter();
+        rolesConverter.setAuthoritiesClaimName("roles");
+        rolesConverter.setAuthorityPrefix("ROLE_");
+
+        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
+        converter.setJwtGrantedAuthoritiesConverter(rolesConverter);
+        return converter;
     }
 
     @Bean
@@ -67,6 +85,6 @@ public class SecurityConfig {
 
     @Bean
     PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(12);
+        return new BCryptPasswordEncoder(12); // cost 12 ~ 250 ms per hash: slow for attackers, fine for users
     }
 }
